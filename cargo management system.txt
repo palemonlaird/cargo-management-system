@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Cargo {
+    private String name;
+    private double weight;
+
+    public Cargo(String name, double weight) {
+        this.name = name;
+        this.weight = weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+}
+
+public class CargoManagementSystem {
+    private List<Cargo> cargoList;
+
+    public CargoManagementSystem() {
+        cargoList = new ArrayList<>();
+    }
+
+    public void addCargo(String name, double weight) {
+        Cargo cargo = new Cargo(name, weight);
+        cargoList.add(cargo);
+        System.out.println("Cargo added: " + name + ", Weight: " + weight);
+    }
+
+    public void displayCargoList() {
+        System.out.println("Cargo List:");
+        for (Cargo cargo : cargoList) {
+            System.out.println("Name: " + cargo.getName() + ", Weight: " + cargo.getWeight());
+        }
+    }
+
+    public static void main(String[] args) {
+        CargoManagementSystem cargoSystem = new CargoManagementSystem();
+        Scanner scanner = new Scanner(System.in);
+
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("1. Add Cargo");
+            System.out.println("2. Display Cargo List");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter cargo name: ");
+                    String name = scanner.next();
+                    System.out.print("Enter cargo weight: ");
+                    double weight = scanner.nextDouble();
+                    cargoSystem.addCargo(name, weight);
+                    break;
+                    
+                case 2:
+                    cargoSystem.displayCargoList();
+                    break;
+
+                case 3:
+                    exit = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        scanner.close();
+    }
+}
